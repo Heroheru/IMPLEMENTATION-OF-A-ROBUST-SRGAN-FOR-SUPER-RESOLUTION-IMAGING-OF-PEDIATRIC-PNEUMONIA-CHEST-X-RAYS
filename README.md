@@ -1,5 +1,6 @@
 # IMPLEMENTATION OF A ROBUST SRGAN FOR SUPER-RESOLUTION IMAGING OF PEDIATRIC PNEUMONIA CHEST X-RAYS
-
+![Left:Output Image, Middle:Input Noise Image, Right:Ground Truth](github_images/FINAL_MODEL.png)
+*Left:Output Image, Middle:Input Noise Image, Right:Ground Truth*
 A noise-robust super-resolution pipeline for chest X-ray (CXR) images. A **DnCNN** denoising module is placed in front of an **SRGAN** generator (with self-attention and a modified, **CheXNet-based perceptual loss**), so that low-resolution (LR) images corrupted by Gaussian noise can be restored to clean high-resolution (HR) output.
 
 ![General Architecture](github_images/general_architecture.png)
@@ -75,16 +76,18 @@ Notes:
 ### Interpretation
 
 - PSNR and SSIM trend upward without extreme jumps or drops, and there are no signs of severe overfitting.
+![PSNR SSIM](github_images/PSNR_SSIM.png)
 - These values are lower than standalone SRGAN (SSIM > 0.8) or DnCNN (SSIM ~0.94). This is expected: Robust SRGAN has a harder optimization problem because it combines three modifications: the integrated DnCNN denoising module, self-attention in the generator, and the CheXNet-based perceptual loss. Standalone SRGAN and DnCNN do not carry this combined burden (DnCNN in particular focuses purely on pixel-level metrics).
 - Because the CheXNet perceptual loss compares chest-X-ray-specific features rather than raw pixels, and self-attention lets the generator reshape global structure, Robust SRGAN prioritizes visual realism, noise removal, and anatomical sharpness over pixel-by-pixel matching with the ground truth. Small structural shifts or micro-variations in tissue regions can lower PSNR/SSIM sharply even when the image is clinically sharp and clean.
 - Fluctuating discriminator loss is normal in adversarial training: the two networks compete, and as the generator improves the discriminator struggles. The generator loss stays near zero, indicating stable learning.
+![LOSS](github_images/LOSS.png)
 
 ---
 
 ## 3. Model Selection
 
 ### 3.4 Preliminary visual selection
-Eleven candidate epochs were shortlisted from visual inspection of output images: **24, 25, 34, 44, 51, 52, 53, 54, 55, 56, 57**.
+Eleven candidate epochs were shortlisted from visual inspection of output images
 ![Eleven Candidates](github_images/COMPARED.png)
 
 ### 3.5 Comparison with ground truth and noisy LR input
@@ -117,8 +120,6 @@ Evaluates the contribution of each proposed component: DnCNN-based denoising, se
 Written analysis of the ablation results: *In progress.*
 
 ---
-
-
 
 ## Key Takeaways
 
