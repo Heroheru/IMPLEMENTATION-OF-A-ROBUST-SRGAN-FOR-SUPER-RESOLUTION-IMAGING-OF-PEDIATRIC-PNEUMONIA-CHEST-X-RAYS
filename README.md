@@ -85,14 +85,17 @@ Notes:
 
 ### 3.4 Preliminary visual selection
 Eleven candidate epochs were shortlisted from visual inspection of output images: **24, 25, 34, 44, 51, 52, 53, 54, 55, 56, 57**.
+![Eleven Candidates](github_images/COMPARED.png)
 
 ### 3.5 Comparison with ground truth and noisy LR input
 - Models from **epoch > 50** tend to produce **vertical-line artifacts**. This suggests that the learning-rate scheduler used after epoch 50 (0.001 → 0.0001) is not effective for this setup.
 - **Epochs 25 and 34** give high-resolution CXR images with minimal artifacts and good fidelity to the ground truth.
 - Between the two, **epoch 25 is slightly sharper** and is chosen as the **best model**.
+![Left:Output Image, Middle:Input Noise Image, Right:Ground Truth](github_images/FINAL_MODEL.png)
 
 | Selected model | PSNR (dB) | SSIM |
 |---|---:|---:|
+
 | Epoch 25 | 24.99 | 0.5776 |
 
 > Selection is based on artifact analysis, standard quantitative metrics (PSNR/SSIM), and perceptual-feature consistency. **No radiology expert has evaluated the outputs yet.**
