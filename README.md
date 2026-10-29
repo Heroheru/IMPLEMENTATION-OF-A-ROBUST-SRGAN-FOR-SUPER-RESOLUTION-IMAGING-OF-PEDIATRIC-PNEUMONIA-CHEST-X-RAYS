@@ -1,6 +1,8 @@
 # IMPLEMENTATION OF A ROBUST SRGAN FOR SUPER-RESOLUTION IMAGING OF PEDIATRIC PNEUMONIA CHEST X-RAYS
 ![Left:Output Image, Middle:Input Noise Image, Right:Ground Truth](github_images/FINAL_MODEL.png)
 *Left:Output Image, Middle:Input Noise Image, Right:Ground Truth*
+
+
 A noise-robust super-resolution pipeline for chest X-ray (CXR) images. A **DnCNN** denoising module is placed in front of an **SRGAN** generator (with self-attention and a modified, **CheXNet-based perceptual loss**), so that low-resolution (LR) images corrupted by Gaussian noise can be restored to clean high-resolution (HR) output.
 
 ![General Architecture](github_images/general_architecture.png)
